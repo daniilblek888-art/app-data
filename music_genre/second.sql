@@ -5,7 +5,7 @@ LIMIT 1
 
 select title, duration
 from track
-where duration > 210
+where duration >= 210
 
 select name, release_year
 from collections
@@ -17,4 +17,4 @@ where name not like '% %'
 
 select title 
 from track
-where title like '%мой%' or title like '%my%';
+where title ILIKE '%мой%' or title ILIKE '%my%';

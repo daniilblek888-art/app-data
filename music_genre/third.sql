@@ -14,18 +14,21 @@ join track t  on a.id = t.album_id
 group by a.title 
 order by a.title;
 
-select name
-from artist  
-where id not in (
-	select artist_id
-	from album 
-	where release_year = 2020
-	);
+SELECT name 
+FROM artist 
+WHERE name NOT IN (
+    SELECT a.name 
+    FROM artist a
+    JOIN artist_and_album aa ON a.id = aa.artist_id
+    JOIN album alb ON aa.album_id = alb.id
+    WHERE alb.release_year = 2020
+);
 
-select distinct c.name
-from  collections c 
-join collection_and_track cat on c.id = cat.collection_id 
-join track t on cat.collection_id = t.id 
-join album a on t.album_id = a.id 
-join artist art on a.artist_id = art.id 
-where art.name = 'Имя артиста';
+SELECT DISTINCT c.name
+FROM collections c
+JOIN collection_and_track cat ON c.id = cat.collection_id
+JOIN track t ON cat.track_id = t.id
+JOIN album alb ON t.album_id = alb.id
+JOIN artist_and_album aa ON alb.id = aa.album_id
+JOIN artist art ON aa.artist_id = art.id
+WHERE art.name = 'Paco de Lucia';
