@@ -15,6 +15,12 @@ select name
 from artist
 where name not like '% %'
 
-select title 
-from track
-where title ILIKE '%мой%' or title ILIKE '%my%';
+--первый вариант выполнения задания "Название треков, которые содержат слово «мой» или «my».":
+SELECT title 
+FROM track
+WHERE string_to_array(lower(title), ' ') && ARRAY['my', 'мой'];
+
+--второй вариант выполнения заданя "Название треков, которые содержат слово «мой» или «my».":
+SELECT title 
+FROM track
+WHERE title ~* '\y(my|мой)\y';

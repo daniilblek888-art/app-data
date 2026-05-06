@@ -17,8 +17,7 @@ release_year integer
 create table album(
 id serial primary key,
 title varchar(100),
-release_year integer,
-artist_id integer references artist(id)
+release_year integer
 );
 
 create table track(
